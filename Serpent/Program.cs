@@ -6,28 +6,34 @@ using System.Threading.Tasks;
 
 namespace Serpent
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Window size
-            Console.SetBufferSize(150, 95);
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			VerticalLine vl = new VerticalLine(0, 10, 5, '%');
+			Draw(vl);
 
-            // Drawing a fram
-            HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
-            HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
-            VerticalLine leftLine = new VerticalLine(0, 24, 0, '+');
-            VerticalLine rightLine = new VerticalLine(0, 24, 78, '+');
-            upLine.Drow();
-            downLine.Drow();
-            leftLine.Drow();
-            rightLine.Drow();
+			Point p = new Point(4, 5, '*');
+			Figure fSnake = new Snake(p, 4, Direction.RIGHT);
+			Draw(fSnake);
+			Snake snake = (Snake)fSnake;
 
-            // Drawing points
-            Point p = new Point(4, 5, '*');
-            p.Draw();
+			HorizontalLine hl = new HorizontalLine(0, 5, 6, '&');
 
-            Console.ReadLine();
-        }
-    }
+			List<Figure> figures = new List<Figure>();
+			figures.Add(fSnake);
+			figures.Add(vl);
+			figures.Add(hl);
+
+			foreach (var f in figures)
+			{
+				f.Draw();
+			}
+		}
+
+		static void Draw(Figure figure)
+		{
+			figure.Draw();
+		}
+	}
 }
